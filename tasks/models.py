@@ -44,7 +44,9 @@ class Worker(AbstractUser):
     position = models.ForeignKey(
         Position,
         on_delete=models.RESTRICT,
-        related_name='workers'
+        related_name='workers',
+        blank=True,
+        null=True,
     )
 
     class Meta:
