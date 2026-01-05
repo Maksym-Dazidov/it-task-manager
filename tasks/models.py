@@ -80,16 +80,16 @@ class Task(models.Model):
     task_type = models.ForeignKey(
         TaskType,
         on_delete=models.RESTRICT,
-        related_name='tasks_by_type'
+        related_name='tasks'
     )
     assignees = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        related_name='assigned_tasks',
+        related_name='tasks',
         blank=True,
     )
     tags = models.ManyToManyField(
         Tag,
-        related_name='tagged_tasks',
+        related_name='tasks',
         blank=True,
     )
 
