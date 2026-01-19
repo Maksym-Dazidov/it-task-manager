@@ -119,3 +119,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 AUTH_USER_MODEL = 'tasks.Worker'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'tasks:index'
+LOGOUT_REDIRECT_URL = 'login'
