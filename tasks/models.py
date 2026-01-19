@@ -69,7 +69,7 @@ class Task(models.Model):
         LOW = 'LO', 'Low'
 
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     deadline = models.DateTimeField(null=True, blank=True)
     is_completed = models.BooleanField(default=False)
     priority = models.CharField(
