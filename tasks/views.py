@@ -213,6 +213,11 @@ class WorkerDeleteView(LoginRequiredMixin, SafeDeleteMixin, DeleteView):
     success_url = reverse_lazy('tasks:worker-list')
     success_message = 'Deleted successfully.'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["success_url"] = self.success_url
+        return context
+
 
 class TaskListView(LoginRequiredMixin, ListView):
     model = Task
@@ -256,6 +261,11 @@ class TaskDeleteView(LoginRequiredMixin, SafeDeleteMixin, DeleteView):
     template_name = 'tasks/_generic_confirm_delete.html'
     success_url = reverse_lazy('tasks:task-list')
     success_message = 'Deleted successfully.'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["success_url"] = self.success_url
+        return context
 
 
 @login_required
