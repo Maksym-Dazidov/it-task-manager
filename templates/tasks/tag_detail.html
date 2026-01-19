@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ tag.name }}</h2>
+
+<h5 class="mt-3">Tasks with this tag:</h5>
+<ul>
+{% for task in tag.tasks.all %}
+    <li>
+        <a href="{% url 'tasks:task-detail' task.pk %}">
+            {{ task.name }}
+        </a>
+    </li>
+{% empty %}
+    <li>No tasks</li>
+{% endfor %}
+</ul>
+{% endblock %}
