@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -268,16 +269,16 @@ class TaskDeleteView(LoginRequiredMixin, SafeDeleteMixin, DeleteView):
         return context
 
 
-@login_required
-def toggle_assign_to_task(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    user = request.user
+class TaskToggleAssignView(LoginRequiredMixin, View):
+    def post(self, request, pk, *args, **kwargs):
+        task = get_object_or_404(Task, pk=pk)
+        user = request.user
 
-    if task.assignees.filter(pk=user.pk).exists():
-        task.assignees.remove(user)
-        messages.info(request, 'You have left this task')
-    else:
-        task.assignees.add(user)
-        messages.success(request, 'You have joined this task')
+        if task.assignees.filter(pk=user.pk).exists():
+            task.assignees.remove(user)
+            messages.info(request, 'You have left this task')
+        else:
+            task.assignees.add(user)
+            messages.success(request, 'You have joined this task')
 
-    return redirect('tasks:task-detail', pk=pk)
+        return redirect('tasks:task-detail', pk=pk)

@@ -26,7 +26,7 @@ from .views import (
     TaskCreateView,
     TaskUpdateView,
     TaskDeleteView,
-    toggle_assign_to_task,
+    TaskToggleAssignView,
 )
 
 urlpatterns = [
@@ -56,7 +56,7 @@ urlpatterns = [
     path('tasks/create/', TaskCreateView.as_view(), name='task-create'),
     path('tasks/<int:pk>/update/', TaskUpdateView.as_view(), name='task-update'),
     path('tasks/<int:pk>/delete/', TaskDeleteView.as_view(), name='task-delete'),
-    path('tasks/<int:pk>/toggle-assign/', toggle_assign_to_task, name='task-toggle-assign'),
+    path('tasks/<int:pk>/toggle-assign/', TaskToggleAssignView.as_view(), name='task-toggle-assign'),
 ]
 
 app_name = 'tasks'
