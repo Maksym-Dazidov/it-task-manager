@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'tasks:index' %}">
+      Task Manager
+    </a>
+
+    <div class="d-flex align-items-center text-white">
+      {% if user.is_authenticated %}
+        <span class="me-3">👤 {{ user.username }}</span>
+        <form method="post" action="{% url 'logout' %}" class="d-inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline-light btn-sm">
+            Logout
+          </button>
+        </form>
+      {% else %}
+        <a href="{% url 'login' %}" class="btn btn-outline-light btn-sm">
+          Login
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

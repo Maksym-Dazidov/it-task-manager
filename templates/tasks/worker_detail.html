@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ worker.username }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+    <h2>{{ worker.username }}</h2>
+    <div>
+        <a href="{% url 'tasks:worker-update' worker.pk %}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="{% url 'tasks:worker-delete' worker.pk %}" class="btn btn-danger btn-sm">Delete</a>
+    </div>
+</div>
+
+<p><strong>Name:</strong> {{ worker.first_name }} {{ worker.last_name }}</p>
+<p><strong>Email:</strong> {{ worker.email }}</p>
+<p><strong>Position:</strong> {{ worker.position|default:"—" }}</p>
+
+<h5 class="mt-4">📋 Assigned tasks</h5>
+<ul class="list-group">
+    {% for task in worker.tasks.all %}
+        <li class="list-group-item">
+            <a href="{% url 'tasks:task-detail' task.pk %}">
+                {{ task.name }}
+            </a>
+            <span class="badge bg-secondary ms-2">
+                {{ task.task_type.name }}
+            </span>
+        </li>
+    {% empty %}
+        <li class="list-group-item">No tasks assigned</li>
+    {% endfor %}
+</ul>
+{% endblock %}

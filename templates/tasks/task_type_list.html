@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>🧩 Task Types</h2>
+<a href="{% url 'tasks:task-type-create' %}" class="btn btn-primary mb-3">+ Add</a>
+
+<ul class="list-group">
+{% for type in task_type_list %}
+    <li class="list-group-item d-flex justify-content-between">
+        <a href="{% url 'tasks:task-type-detail' type.pk %}">
+            {{ type.name }}
+        </a>
+        <span>
+            <a href="{% url 'tasks:task-type-update' type.pk %}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{% url 'tasks:task-type-delete' type.pk %}" class="btn btn-sm btn-danger">Delete</a>
+        </span>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
